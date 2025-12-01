@@ -34,7 +34,7 @@
       };
 
       // ★★★ ここを必ずあなたのGASのURLに置き換える ★★★
-      const apiUrl = "★★あなたのGASのURLに置き換える★★"; 
+      const apiUrl = "https://script.google.com/macros/s/AKfycbxgcReBXre86B2Gex24VOvVUPQu-N_in7XVKc4VlZMWm6aFpRIz6Xj0tG5580Qx3qwMrA/exec"; 
 
       try {
         const res = await fetch(apiUrl, {
@@ -46,7 +46,7 @@
         const result = await res.json();
         
         if (result.status === "success") {
-          alert("素敵なご感想を共有いただき、ありがとうございました！");
+          alert("ありがとうございました！");
           document.getElementById("myForm").reset(); // フォームをクリア
         } else {
           alert("送信に失敗しました。時間をおいて再度お試しください。");
