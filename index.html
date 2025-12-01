@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>展示会 感想フォーム</title>
+  </head>
+<body>
+  <form id="myForm">
+    <h2>どこで見つけた？</h2>
+    <input type="text" name="location" placeholder="例：朝の通学路、家族との食卓、図書館..." required><br>
+
+    <h2>どんな状況だった？</h2>
+    <input type="text" name="situation" placeholder="例：むかしの人と遭遇した、忘れ物に気づいた..." required><br>
+
+    <h2>どんな神様？</h2>
+    <input type="text" name="god_type" placeholder="例：絶妙に気まずい知人と会わせる神様..." required><br>
+
+    <h2>その時どう思った？</h2>
+    <textarea name="impression" placeholder="例：もっと仲良くなれるかも？..." required></textarea><br>
+    
+    <button type="submit">感想を共有する</button>
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", async (e) => {
+      e.preventDefault(); // ページ遷移を防止
+
+      // フォームの入力値を取得し、GASの変数名に合わせてオブジェクトを作成
+      const data = {
+        location: e.target.location.value,
+        situation: e.target.situation.value,
+        god_type: e.target.god_type.value,
+        impression: e.target.impression.value
+      };
+
+      // ★★★ ここを必ずあなたのGASのURLに置き換える ★★★
+      const apiUrl = "★★あなたのGASのURLに置き換える★★"; 
+
+      try {
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          // GASにJSON形式でデータを送信
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        
+        if (result.status === "success") {
+          alert("素敵なご感想を共有いただき、ありがとうございました！");
+          document.getElementById("myForm").reset(); // フォームをクリア
+        } else {
+          alert("送信に失敗しました。時間をおいて再度お試しください。");
+        }
+      } catch (error) {
+        console.error('送信エラー:', error);
+        alert("送信中にエラーが発生しました。");
+      }
+    });
+  </script>
+</body>
+</html>
